@@ -80,6 +80,11 @@ $ sudo docker exec -it <LB_NAME> bash
 $ nginx -s reload
 ```
 
+## FastAPI
+```bash
+$ fastapi dev main.py
+```
+
 ## .zshrc 수정  
 ```bash
 # JAVA_HOME
