@@ -85,6 +85,15 @@ $ nginx -s reload
 $ fastapi dev main.py
 ```
 
+## PDM to
+```bash
+$ pdm export -o requirements.txt --without-hashes
+```
+## Docker build & Run
+```bash
+$ sudo docker run -d --name my-api-1 -p 8949:80 myapi1
+```
+
 ## .zshrc 수정  
 ```bash
 # JAVA_HOME
