@@ -26,12 +26,12 @@ nums = [1, 2, 3, 4, 5]
 #     # print([nums])
     
 def num_cal(data, fun): # 이 함수를 쓰면 위에 있는 square, double 안 써도 됨
-    # TODO 고차 함수로 작성
+    # TODO 고차 함수로
     start_time = time.time()
     print([fun(x) for x in nums])
     end_time = time.time()
     print(end_time - start_time)
     # print([nums])
 
-# num_cal(nums, square)
-# num_cal(nums, square)
+num_cal(nums, square)
+num_cal(nums, square)
