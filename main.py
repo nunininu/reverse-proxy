@@ -110,8 +110,8 @@ def add_large_arrays_choices():
     # 수행 시간 리턴
     # 리턴값: 배열 생성 시간(array_creation_time)과 덧셈 수행(addition_time) 시간을 각각 리턴
     return {
-        "execution_time": end_creation_time - start_creation_time,
-        "execution_time": add_end_time - add_start_time
+        "array_creation_time": end_creation_time - start_creation_time,
+        "addtion_time": add_end_time - add_start_time
         }
     
     ## TODO add_large_array() 를 고차 함수를 이용해서 중복코드 제거
@@ -120,7 +120,7 @@ def add_large_arrays_choices():
     ### 위 함수의 리턴값은 array_creation_time, addtion_time 이다
     ### def generate_random_array_wirh_randint(N): -> 함수와 아래 함수를 만든다
     ### def generate_random_array_wirh_choices(N):
-    ### 위 두 함수의 리턴값은 list이다
+    ### 위 두 함수의 리턴값은 list, list이다
     ### 그리고 조합한다.
     
     def add_arrays(N, generate_random_array):
