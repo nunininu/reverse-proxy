@@ -89,9 +89,12 @@ $ fastapi dev main.py
 ```bash
 $ pdm export -o requirements.txt --without-hashes
 ```
-## Docker build & Run
+## Docker build & Run (수정필요)
 ```bash
 $ sudo docker run -d --name my-api-1 -p 8949:80 myapi1
+$ sudo docker login
+$ sudo docker push <ID>/api:6.1.0
+$ sudo docker run -d --name api610 -p 8610:80 <ID>/api:6.1.0
 ```
 
 ## .zshrc 수정  
