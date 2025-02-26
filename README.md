@@ -1,69 +1,89 @@
-# recverse-proxy 
-- 성능 
-- 부하분산(LB) 
-- 가상호스트 및 라우팅 
-
+# reverse-proxy
+- 성능
+- 부하분산(LB)
+- 가상호스트 및 라우팅
 
 ## python server
 ```bash
 $ python -m http.server --directory pyweb1 8001
-$ python -m http.server --directory pyweb1 8002
-$ python -m http.server --directory 8003
+$ python -m http.server --directory pyweb2 8002
+$ python -m http.server 8003 --directory blog 
+```
+## nginx
+- https://ubuntu.com/tutorials/install-and-configure-nginx#1-overview
+```bash
+# install
+$ sudo apt install nginx
 
-# 아래 방식으로 동작하는 함수를 만들어 보세요 (hint: *args  **kargs)
-run_server() 로도 호출 가능
-run_server(8000)
-run_server(8000, directory="abc")로도 호출 가능
-run_server(directory="abc", port=8000)로도 호출가능 
-
+$ sudo service nginx restart
+$ sudo service nginx stop 
+$ sudo service nginx start
+$ sudo service nginx status #-> worker 16ea
+$ sudo nginx -t # syntax check
+```
 
 ## nGrinder
-- http://localhost:8080(ID: admin / PW:admin)
+- http://localhost:8080 (admin/admin)
 ```bash
 $ pwd
 ~/app
 $ tree -L 2
 .
 ├── ngrinder-agent
-│   ├── lib
-│   ├── run_agent.bat
-│   ├── run_agent.sh
-│   ├── run_agent_bg.sh
-│   ├── run_agent_internal.bat
-│   ├── run_agent_internal.sh
-│   ├── stop_agent.bat
-│   └── stop_agent.sh
+│   ├── lib
+│   ├── run_agent.sh
+│   ├── run_agent_bg.sh
+│   ├── run_agent_internal.sh
+│   └── stop_agent.sh
 └── ngrinder-controller
     └── ngrinder-controller-3.5.9-p1.war
-```
 
 # controller
-```bash
-$ sudo apt install openjdk-11-jdk
-$ wget https://github.com/naver/ngrinder/releases/download/ngrinder-3.5.9-p1-20240613/ngrinder-controller-3.5.9-p1.war                                                                                           $ mkdir ngrinder-controller                                                                                                                                                                                      $ mv ngrinder-controller-3.5.9-p1.war ngrinder-controller  
 $ java -jar ngrinder-controller-3.5.9-p1.war
-```
-
-
-## nginx
-- https://ubuntu.com/tutorials/install-and-configure-nginx#1-overview
-```bash
-$ sudo service nginx restart
-$ sudo service nginx stop
-$ sudo service nginx start
-$ sudo service nginx status #-> worker 16ea
-$ sudo nginx -t # syntax check
-```
 
 # agent
-```bash
 $ run_agent.sh
 ```
 
-## .zshrc 수정  
+## Docker
 ```bash
-# JAVA_HOME
-# nGrinder
-export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
-export PATH=$JAVA_HOME/bin:$PATH
+$ docker compose up -d  # 백그라운드에서 컨테이너 실행
+$ docker compose down   # 컨테이너 중지 및 네트워크 제거
+$ docker compose stop   # 컨테이너 중지
+$ docker compose start  # 중지된 컨테이너 다시 시작
+$ docker compose restart  # 컨테이너 재시작
+$ docker compose down  # 컨테이너, 네트워크 제거
+$ sudo docker compose stats # 성능 모니터링
+$ sudo docker compose up -d --scale web1=3 # scale out
+$ sudo docker compose logs -f api # 로그확인
+$ sudo docker compose up -d --build api # 특정 컨테이너 다시 빌드하여 띄우기
 ```
+
+## nginx
+```bash
+$ sudo docker exec -it <LB_NAME> bash
+$ nginx -s reload
+```
+
+## FastAPI
+- https://fastapi.tiangolo.com/
+```bash
+$ fastapi dev main.py
+```
+
+## PDM to requirements.txt
+```bash
+$ pdm export -o requirements.txt --without-hashes
+```
+
+## Docker build & push & pull run
+```bash
+$ sudo docker build -t sawyertom/api:6.1.0 -f docker/fastapi/Dockerfile .
+$ sudo docker login
+$ sudo docker push sawyertom/api:6.1.0
+$ sudo docker run -d --name api610 -p 8610:80 sawyertom/api:6.1.0
+```
+
+
+
+
