@@ -15,5 +15,12 @@ server {
 	{
 		proxy_pass http://localhost:8002/;
 	}
-}
 
+	location /blog
+	{
+		alias /var/www/blog/;
+		#index index.html;
+		#autoindex on;
+		#proxy_pass http://localhost:8005/;
+	}
+}
