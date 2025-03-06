@@ -10,7 +10,8 @@ app = FastAPI()
 
 
 # 상수
-N = 10**5  # 10만 개 요소
+# N = 10**5  # 10만 개 요소
+N = 10**4  # 1만 개 요소
 
 @app.get("/add-count-large-arrays-python")
 # 문제 3
