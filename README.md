@@ -84,6 +84,13 @@ $ sudo docker push sawyertom/api:6.1.0
 $ sudo docker run -d --name api610 -p 8610:80 sawyertom/api:6.1.0
 ```
 
+## Deploy Blog to AWS
+```bash
+$ scp -i ~/keys/MYKEY.pem ubuntu@<IP>
 
+$ cd code
+$ git clone http://<URL>
+$ cd <REPOSITORY_NAME>
+$ 
 
 

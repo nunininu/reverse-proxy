@@ -14,15 +14,25 @@ services:
     restart: always
     links:
       - controller
-
+  # Run Service
   lb:
-    image: nginxproxy/nginx-proxy # https://github.com/nginx-proxy/nginx-proxy
+    image: nginx:1.27.4 
     ports:
       - "8949:80"
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
     depends_on:
       - api
+    volumes:
+     - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf
+     - ./conf/nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+
+  # lb:
+  #   image: nginxproxy/nginx-proxy # https://github.com/nginx-proxy/nginx-proxy
+  #   ports:
+  #     - "8949:80"
+  #   volumes:
+  #     - /var/run/docker.sock:/tmp/docker.sock:ro
+  #   depends_on:
+  #     - api
 
   api:
     build:
